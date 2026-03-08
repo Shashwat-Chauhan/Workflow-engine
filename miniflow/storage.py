@@ -46,4 +46,9 @@ class FileStorage(BaseStorage):
                 files.append(f[:-5])
         
         return files
-        
+
+
+def get_storage(backend: str = config.STORAGE_BACKEND) -> BaseStorage:
+    if backend == "sqlite":
+        return SQLiteStorage()
+    return FileStorage()
