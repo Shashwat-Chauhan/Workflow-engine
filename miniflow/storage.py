@@ -50,5 +50,5 @@ class FileStorage(BaseStorage):
 
 def get_storage(backend: str = config.STORAGE_BACKEND) -> BaseStorage:
     if backend == "sqlite":
-        return SQLiteStorage()
+    #    return SQLiteStorage()
     return FileStorage()
