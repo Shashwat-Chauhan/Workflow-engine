@@ -29,7 +29,7 @@ class FileStorage(BaseStorage):
     
     def save_run(self , run_id:str , payload : Dict[str , Any]) -> None:
         with open(self._path(run_id) , "w" , encoding="utf-8") as f:
-            json.dump(payload , d , default=str , indent = 2)
+            json.dump(payload , f , default=str , indent = 2)
     
     def load_run(self, run_id: str) -> Optional[Dict[str, Any]]:
         path = self._path(run_id)
@@ -39,5 +39,11 @@ class FileStorage(BaseStorage):
             return json.load(f)
 
     def list_runs(self) -> List[str]:
-        files = [f[:-5] for f in os.listdir(self.data_dir) if f.endswith(".json")]
+        files = []
+
+        for f in os.listdir(self.data_dir):
+            if f.endswith(".json"):
+                files.append(f[:-5])
+        
         return files
+        
